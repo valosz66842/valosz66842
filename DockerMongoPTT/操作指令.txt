@@ -1,0 +1,52 @@
+
+以下VM內部指令
+
+安裝git
+yum install git
+下載資料
+git clone https://github.com/valosz66842/PTT.git
+進入資料夾
+cd PTT
+安裝docker
+sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+
+
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+
+
+sudo yum install docker-ce docker-ce-cli containerd.io
+
+docker version
+
+安裝docker-compose
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+sudo gpasswd -a ${USER} docker
+
+docker-compose --version
+
+打開docker
+
+systemctl start docker
+systemctl enable docker
+
+進入docker內部執行爬蟲
+docker exec -it python bash
+python PTT.py
+
+查看結果
+打開瀏覽器
+輸入網址127.0.0.1:1234
+頁面開啟後
+1. connection name 打 mongodb
+2. connection-string(連線)打 mongodb://mongodb:27017
+按下Add connection
+再按下Connect
+可以看到傳入mongodb的資料

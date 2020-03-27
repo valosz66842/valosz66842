@@ -1,0 +1,5 @@
+FROM continuumio/anaconda3
+ADD ./PTT /opt/PTT
+WORKDIR /opt/PTT
+RUN pip install --upgrade pip
+RUN pip install -r ./requirements.txt

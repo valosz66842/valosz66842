@@ -1,0 +1,46 @@
+version: '2.2'
+services:
+  python:
+    user: root
+    build:
+      context: ./
+      dockerfile: dockerfile_ptt
+    container_name: python
+    tty: true
+    stdin_open: true
+    depends_on:
+      - mongo
+    volumes:
+      - ./PTT:/opt/PTT
+    restart: always
+  mongo:
+    image: mongo
+    container_name: mongodb
+    hostname: mongodb
+    volumes:
+      - ./mongodb:/data/db
+    restart: always
+    expose:
+      - 6016
+    ports:
+      - "27017:27017"
+
+  adminmongo:
+    image: mrvautin/adminmongo
+    container_name: adminmongo
+    hostname: adminmongo
+    ports:
+      - "1234:1234"
+    environment:
+      - HOST=0.0.0.0
+  notebook:
+    image: jupyter/tensorflow-notebook
+    container_name: jupyter_1
+    hostname: jupyter
+    restart: unless-stopped
+    volumes:
+      - ./work:/home/jovyan/work
+      - ./jupyter_notebook_config.py:/root/.jupyter/jupyter_notebook_config.py
+    command: start-notebook.sh --NotebookApp.token=''
+    ports:
+      - 7777:8888

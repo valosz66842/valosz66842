@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load static %}
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>You to  be a Youtuber</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap9.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">You to  be a YouTuber</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">專題班級
+              <span class="sr-only">專題班級</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">題目發想</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">給予建議</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.facebook.com/a.e.johnny">製作人員</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+    <br>
+    <br>
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4" style="background-image: url({% static 'index\web.jpg' %});background-size:100% 100%;" alt="" >
+      <h1 class="display-3"></h1>
+      <p class="lead"></p>
+      <p class="card-text"></p>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    </header>
+
+    <!-- Page Features -->
+    <div class="row text-center">
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static 'WordCloud\WordCloud_20200124.jpg' %}" alt="" width="100" height="150">
+          <div class="card-body">
+            <h4 class="card-title">熱門題材</h4>
+            <p class="card-text">新聞文字雲！關鍵議題趨勢圖！</p>
+          </div>
+          <div class="card-footer">
+            <a href="/NewWordCloud/" class="btn btn-primary">前往！</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static 'Emo/Emoew.png' %}" alt="" width="100" height="150">
+          <div class="card-body">
+            <h4 class="card-title">影片留言分析</h4>
+            <p class="card-text">輸入Youtube網址，讓我對留言進行分析！</p>
+          </div>
+          <div class="card-footer">
+            <a href="/MessageEmotion/" class="btn btn-primary">前往！</a>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static 'AITitle/title.jpg' %}" alt="" width="100" height="150">
+          <div class="card-body">
+            <h4 class="card-title">標題、腳本生成器</h4>
+            <p class="card-text">輸入腳本，做出適合的標題！</p>
+          </div>
+          <div class="card-footer">
+            <a href="/AiToTitle/" class="btn btn-primary">前往！</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static 'YoutubeReport/Report.jpg' %}" alt="" width="100" height="150">
+          <div class="card-body">
+            <h4 class="card-title">流量分析圖表</h4>
+            <p class="card-text">選擇分類及平均觀看數區間！秀出對應圖表！</p>
+          </div>
+          <div class="card-footer">
+            <a href="/YoutubeReport/" class="btn btn-primary">前往！</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <div id="YoutubeFlow"><img class="card-img-top" src="{% static 'images/流量分析圖.jpg' %}" alt="" width="350" height="150"></div>
+          <div class="card-body">
+            <h4 class="card-title">影片流量預測</h4>
+            <p class="card-text">輸入影片的資訊！預測一周後的流量！</p>
+          </div>
+          <div class="card-footer">
+            <a href="/YoutubeFlow/" class="btn btn-primary">前往！</a>
+          </div>
+        </div>
+      </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static 'Feat/Feat.png' %}" alt="" width="100" height="150">
+          <div class="card-body">
+            <h4 class="card-title">合作流量預測</h4>
+            <p class="card-text">輸入兩個頻道的資訊，預測兩周後流量！</p>
+          </div>
+          <div class="card-footer">
+            <a href="/FeatFlow/" class="btn btn-primary">前往！</a>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script>
+  		function show(){
+		var myDate = new Date();
+	    var Seconds=new Date().getSeconds();
+		            if(Seconds!= a)
+			            $.ajax
+                              (
+                                  {
+                                      url: 'ajax/ajax_index_Img/',
+                                      data:{"Img_ID":"555555"},
+                                      type: 'GET',
+                                      dataType: 'json',
+                                      success: function (data)
+                                      {
+                                        var content='';
+                                        $.each
+                                        (
+                                            data,function(key,value)
+                                            {
+                                                {
+                                                  content+='<div name='+key+' class="row"> '+value+' </div>'
+                                                }
+                                            }
+                                        );
+                                         $('#YoutubeFlow').html(content)
+                                      },
+                                  }
+                              );
+                    var a=Seconds
+		 }
+
+	</script>
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white"></p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/chart-area-demo.js' %}"></script>
+    <script src="{% static 'js/chart-bar-demo.js' %}"></script>
+</body>
+
+</html>
+
+

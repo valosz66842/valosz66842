@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load static %}
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>影片留言分析</title>
+        <link href="{% static 'css/MessageEmotion1.css' %}" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="/index/">You to  be a YouTuber</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button><!-- Navbar Search-->
+
+            <!-- Navbar-->
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link" href="/index/"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                首頁</a>
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <a class="nav-link" href="/NewWordCloud/"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-columns" ></i></div>
+                                熱門題材</a>
+
+
+                            <a class="nav-link" href="/MessageEmotion/"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-columns" ></i></div>
+                                影片留言分析</a>
+                                                        <a class="nav-link" href="/AiToTitle/"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-columns" ></i></div>
+                                標題、腳本生成器</a>
+                                                        <a class="nav-link" href="/YoutubeReport/"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                流量分析圖表</a>
+                            <a class="nav-link" href="/YoutubeFlow/"><div class="sb-nav-link-icon"><i class="fas fa-columns" ></i></div>
+                                影片流量預測</a>
+                            <a class="nav-link" href="/FeatFlow/"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-columns" ></i></div>
+                                合作流量預測</a>
+                        </div>
+                    </div>
+
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">影片留言分析</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active" >執行時間大約10~30秒 請耐心等候</li>
+                        </ol>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <font color="black" size="6px">
+                                    <div class="card-body"><font color="black" size="6px"><b>請輸入Youtube影片網址</b></font></div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <form  method="get" action="/MessageEmotion/" class="OptionWordCloud" >{% csrf_token %}
+                                                    <input id="UserGetVideoUrl" type="text"  name="UserGetVideoUrl" style="width:1000px; height:30px;" >
+                                                    <input type="submit" class='SubmitClass' id='UserGetVideoUrlSubmitClassInput' value="輸入" onclick="GetInput()">
+                                        </form>
+                                        <div class="small text-white"><i class="Fate"></i></div>
+                                    </div>
+                                    </font>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="reptile" >
+                            <font color="black" size="6px">
+                        {% if HtmlCodeList %}
+                            <ol class="breadcrumbA mb-4">
+                            {% for i in HtmlCodeList %}
+                            {{i}} <br>
+                            {% endfor %}
+                            </ol>
+                        {% endif%}
+                            </font>
+                        <div class="row">
+                            {% if Video_Image %}
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-cloud mr-1"></i>影片留言文字雲</div>
+                                        <img class="card-img-top" id='Statistics_One' name='Statistics_One'  src={{ Video_Image }} alt="" width="700" height="700">
+                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="20%"></canvas></div>
+                                </div>
+                            </div>
+                                                        <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header"><i class="fas fa-chart-pie mr-1"></i>情感分析圓餅圖</div>
+                                        <img class="card-img-top" id='Statistics_Two' name='Statistics_Two'  src={{ Pie_Image }} alt="" width="700" height="700">
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="20%"></canvas></div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+
+
+                        </div>
+                        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+                        <script>
+                            function GetInput(){
+                                var UserInput=document.getElementById("UserGetVideoUrl").value;
+                                {
+                                $.ajax
+                              (
+                                  {
+                                      url: 'ajax/ajax_MessageEmotion/',
+
+                                      type: 'GET',
+                                      dataType: 'json',
+                                      success: function (data)
+                                      {
+                                        var content='';
+                                        $.each
+                                        (
+                                            data,function(key,value)
+                                            {
+                                                {
+                                                  content+='<div name='+key+' > '+value+' </div>'
+                                                }
+                                            }
+                                        );
+                                         $('#reptile').html(content)
+                                      },
+                                  }
+                              );
+                              }
+                            }
+                        </script>
+
+                        <div class="card mb-4">
+                            <div class="card-header"><i class="fas fa-table mr-1"></i>情感分析對應正確率</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                                        <thead>
+                                            <tr>
+                                                <th>情感分析使用過的演算法</th>
+                                                <th>正確率</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td>Linear SVC</td>
+                                                <td>80%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Logistic Regression</td>
+                                                <td>80%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Multinomial NB</td>
+                                                <td>82%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Random Forest</td>
+                                                <td>77%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Snownlp</td>
+                                                <td>81%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+            </div>
+        </div>
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <script src="{% static 'js/chart-area-demo.js' %}"></script>
+        <script src="{% static 'js/chart-bar-demo.js' %}"></script>
+    </body>
+</html>
